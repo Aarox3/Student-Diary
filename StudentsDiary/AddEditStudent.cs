@@ -12,68 +12,57 @@ using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
-    
-    
+        
     public partial class AddEditStudent : Form
     {
-        private string _filePath =
-               Path.Combine(Environment.CurrentDirectory, "students.txt");
+        public delegate void MySimpleDelegate();
+        public event MySimpleDelegate StudentAdded;
+
         private int _studentId;
+        private Student _student;
+
+        private FileHelper<List<Student>> _fileHelper =
+            new FileHelper<List<Student>>(Program.FilePath);
 
         public AddEditStudent(int id = 0)
         {
             InitializeComponent();
             _studentId = id;
-
-
-            if (id != 0)
+            GetStudentData();
+            tbName.Select();
+        }
+               
+        private void GetStudentData()
+        {
+            if (_studentId != 0)
             {
-                var students = DeserializeFromFile();
-                var student = students.FirstOrDefault(x => x.Id == id);
-                if (student == null)
+                Text = "Edytowanie danych ucznia";
+
+                var students = _fileHelper.DeserializeFromFile();
+
+                _student = students.FirstOrDefault(x => x.Id == _studentId);
+
+                if (_student == null)
                 {
                     throw new Exception("Brak użytkownika o podanym Id");
                 }
-                tbId.Text = student.Id.ToString();
-                tbName.Text = student.Name;
-                tbSurname.Text = student.Surname;
-                tbMath.Text = student.Math;
-                tbPhysic.Text = student.Physics;
-                tbLanguage.Text = student.Foreign;
-                tbPolish.Text = student.Polish;
-                tbtech.Text = student.Technology;
-                rtbComments.Text = student.Comments;
+                FillTextBoxes();
+
             }
-            tbName.Select();
+           
         }
 
-        public void SerializeToFile(List<Student> students)
+        private void FillTextBoxes()
         {
-            var serializer = new XmlSerializer(typeof(List<Student>));
-
-            using (var streamWriter = new StreamWriter(_filePath))
-            {
-                serializer.Serialize(streamWriter, students);
-                streamWriter.Close();
-            }
-            
-        }
-
-        public List<Student> DeserializeFromFile()
-        {
-
-            if (!File.Exists(_filePath))
-            {
-                return new List<Student>();
-            }
-            var serializer = new XmlSerializer(typeof(List<Student>));
-
-            using (var streamReader = new StreamReader(_filePath))
-            {
-                var students = (List<Student>)serializer.Deserialize(streamReader);
-                streamReader.Close();
-                return students;
-            }
+            tbId.Text = _student.Id.ToString();
+            tbName.Text = _student.Name;
+            tbSurname.Text = _student.Surname;
+            tbMath.Text = _student.Math;
+            tbPhysic.Text = _student.Physics;
+            tbLanguage.Text = _student.Foreign;
+            tbPolish.Text = _student.Polish;
+            tbtech.Text = _student.Technology;
+            rtbComments.Text = _student.Comments;
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -97,29 +86,26 @@ namespace StudentsDiary
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var students = DeserializeFromFile();
+            var students = _fileHelper.DeserializeFromFile();
 
             if (_studentId != 0)
-            {
+            
                 students.RemoveAll(x => x.Id == _studentId);
-            }
+            
             else
-            {
 
-                var studentWithHighestId = students.OrderByDescending(x => x.Id).FirstOrDefault();
-                var _studentId = 0;
+               AssignIdToNewStudent(students);
 
-                if (studentWithHighestId == null)
-                {
-                    _studentId = 1;
-                }
-                else
-                {
-                    _studentId = studentWithHighestId.Id + 1;
-                } 
+            AddNewUserToList(students);
 
-                // var _studentId = studentWithHighestId == null ? 1 : studentWithHighestId.Id + 1;
-            }
+
+            _fileHelper.SerializeToFile(students);
+                      
+            Close();
+        }
+
+        private void AddNewUserToList(List<Student> students)
+        {
             var student = new Student
             {
                 Id = _studentId,
@@ -133,16 +119,29 @@ namespace StudentsDiary
                 Technology = tbtech.Text,
             };
             students.Add(student);
-            SerializeToFile(students);
-            Close();
+        }
+
+        private void AssignIdToNewStudent(List<Student> students)
+        {
+            var studentWithHighestId = students.OrderByDescending(x => x.Id).FirstOrDefault();
+
+
+            if (studentWithHighestId == null)
+            {
+                _studentId = 1;
+            }
+            else
+            {
+                _studentId = studentWithHighestId.Id + 1;
+            }
+            // var _studentId = studentWithHighestId == null ? 1 : studentWithHighestId.Id + 1;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-        
+                
     }
 }
 

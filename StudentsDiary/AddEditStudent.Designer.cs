@@ -221,7 +221,7 @@ namespace StudentsDiary
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lbComments
+            // AddEditStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,8 +246,11 @@ namespace StudentsDiary
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.lbId);
             this.Controls.Add(this.tbId);
-            this.Name = "lbComments";
-            this.Text = "AddEditStudent";
+            this.MaximumSize = new System.Drawing.Size(592, 544);
+            this.MinimumSize = new System.Drawing.Size(592, 544);
+            this.Name = "AddEditStudent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Dodawanie ucznia";
             this.ResumeLayout(false);
             this.PerformLayout();
 

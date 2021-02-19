@@ -1,7 +1,7 @@
 ﻿
 namespace StudentsDiary
 {
-    partial class btnAdd
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace StudentsDiary
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddGreen = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -37,16 +37,16 @@ namespace StudentsDiary
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnAddGreen
+            // btnAdd
             // 
-            this.btnAddGreen.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnAddGreen.Location = new System.Drawing.Point(0, 12);
-            this.btnAddGreen.Name = "btnAddGreen";
-            this.btnAddGreen.Size = new System.Drawing.Size(75, 23);
-            this.btnAddGreen.TabIndex = 0;
-            this.btnAddGreen.Text = "Dodaj";
-            this.btnAddGreen.UseVisualStyleBackColor = false;
-            this.btnAddGreen.Click += new System.EventHandler(this.btnAddGreen_Click);
+            this.btnAdd.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnAdd.Location = new System.Drawing.Point(0, 12);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Dodaj";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -86,14 +86,17 @@ namespace StudentsDiary
             this.dgvDiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDiary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDiary.BackgroundColor = System.Drawing.Color.Ivory;
             this.dgvDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDiary.Location = new System.Drawing.Point(0, 59);
             this.dgvDiary.Name = "dgvDiary";
+            this.dgvDiary.RowHeadersVisible = false;
+            this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDiary.Size = new System.Drawing.Size(1018, 400);
             this.dgvDiary.TabIndex = 4;
             // 
-            // btnAdd
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -103,9 +106,10 @@ namespace StudentsDiary
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAddGreen);
-            this.Name = "btnAdd";
-            this.Text = "Form1";
+            this.Controls.Add(this.btnAdd);
+            this.Name = "Main";
+            this.Text = "Dziennik ucznia";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed_1);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
@@ -114,7 +118,7 @@ namespace StudentsDiary
 
         #endregion
 
-        private System.Windows.Forms.Button btnAddGreen;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
