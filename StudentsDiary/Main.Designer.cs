@@ -34,6 +34,9 @@ namespace StudentsDiary
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvDiary = new System.Windows.Forms.DataGridView();
+            this.cbxSearchInClasses = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbSearchInClasses = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,12 +92,38 @@ namespace StudentsDiary
             this.dgvDiary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDiary.BackgroundColor = System.Drawing.Color.Ivory;
             this.dgvDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDiary.Location = new System.Drawing.Point(0, 59);
+            this.dgvDiary.Location = new System.Drawing.Point(0, 100);
             this.dgvDiary.Name = "dgvDiary";
             this.dgvDiary.RowHeadersVisible = false;
             this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDiary.Size = new System.Drawing.Size(1018, 400);
+            this.dgvDiary.Size = new System.Drawing.Size(1018, 379);
             this.dgvDiary.TabIndex = 4;
+            // 
+            // cbxSearchInClasses
+            // 
+            this.cbxSearchInClasses.FormattingEnabled = true;
+            this.cbxSearchInClasses.Location = new System.Drawing.Point(614, 49);
+            this.cbxSearchInClasses.Name = "cbxSearchInClasses";
+            this.cbxSearchInClasses.Size = new System.Drawing.Size(279, 21);
+            this.cbxSearchInClasses.TabIndex = 5;
+            this.cbxSearchInClasses.Click += new System.EventHandler(this.cbxSearchInClasses_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(718, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 6;
+            // 
+            // lbSearchInClasses
+            // 
+            this.lbSearchInClasses.AutoSize = true;
+            this.lbSearchInClasses.Location = new System.Drawing.Point(614, 12);
+            this.lbSearchInClasses.Name = "lbSearchInClasses";
+            this.lbSearchInClasses.Size = new System.Drawing.Size(102, 13);
+            this.lbSearchInClasses.TabIndex = 7;
+            this.lbSearchInClasses.Text = "Sortowanie wg klas:";
             // 
             // Main
             // 
@@ -102,6 +131,9 @@ namespace StudentsDiary
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1030, 491);
+            this.Controls.Add(this.lbSearchInClasses);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbxSearchInClasses);
             this.Controls.Add(this.dgvDiary);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
@@ -113,6 +145,7 @@ namespace StudentsDiary
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -123,6 +156,9 @@ namespace StudentsDiary
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvDiary;
+        private System.Windows.Forms.ComboBox cbxSearchInClasses;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbSearchInClasses;
     }
 }
 

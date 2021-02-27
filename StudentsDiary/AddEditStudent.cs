@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
-        
+
     public partial class AddEditStudent : Form
     {
         public delegate void MySimpleDelegate();
@@ -24,6 +24,7 @@ namespace StudentsDiary
         private FileHelper<List<Student>> _fileHelper =
             new FileHelper<List<Student>>(Program.FilePath);
 
+
         public AddEditStudent(int id = 0)
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace StudentsDiary
             GetStudentData();
             tbName.Select();
         }
-               
+
         private void GetStudentData()
         {
             if (_studentId != 0)
@@ -49,7 +50,7 @@ namespace StudentsDiary
                 FillTextBoxes();
 
             }
-           
+
         }
 
         private void FillTextBoxes()
@@ -63,7 +64,18 @@ namespace StudentsDiary
             tbPolish.Text = _student.Polish;
             tbtech.Text = _student.Technology;
             rtbComments.Text = _student.Comments;
+            chbxAddLessons.Checked = _student.AddLessons;
+            cbxClass.Text = _student.ClassOfStudent;
+
+
+            /*cbxClass.Items.Add("1a");
+            cbxClass.Items.Add("1b");
+            cbxClass.Items.Add("2a");
+            cbxClass.Items.Add("2b");*/
+
         }
+
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -89,23 +101,24 @@ namespace StudentsDiary
             var students = _fileHelper.DeserializeFromFile();
 
             if (_studentId != 0)
-            
+
                 students.RemoveAll(x => x.Id == _studentId);
-            
+
             else
 
-               AssignIdToNewStudent(students);
+                AssignIdToNewStudent(students);
 
             AddNewUserToList(students);
 
 
             _fileHelper.SerializeToFile(students);
-                      
+
             Close();
         }
 
         private void AddNewUserToList(List<Student> students)
         {
+
             var student = new Student
             {
                 Id = _studentId,
@@ -117,6 +130,9 @@ namespace StudentsDiary
                 Physics = tbPhysic.Text,
                 Polish = tbPolish.Text,
                 Technology = tbtech.Text,
+                AddLessons = chbxAddLessons.Checked,
+                ClassOfStudent = cbxClass.Text,
+
             };
             students.Add(student);
         }
@@ -137,11 +153,11 @@ namespace StudentsDiary
             // var _studentId = studentWithHighestId == null ? 1 : studentWithHighestId.Id + 1;
         }
 
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-                
     }
 }
 

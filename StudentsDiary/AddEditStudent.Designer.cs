@@ -49,6 +49,10 @@ namespace StudentsDiary
             this.label1 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.chbxAddLessons = new System.Windows.Forms.CheckBox();
+            this.lb_AddLessons = new System.Windows.Forms.Label();
+            this.cbxClass = new System.Windows.Forms.ComboBox();
+            this.lbClass = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbId
@@ -185,16 +189,16 @@ namespace StudentsDiary
             // 
             // rtbComments
             // 
-            this.rtbComments.Location = new System.Drawing.Point(140, 231);
+            this.rtbComments.Location = new System.Drawing.Point(140, 296);
             this.rtbComments.Name = "rtbComments";
-            this.rtbComments.Size = new System.Drawing.Size(322, 198);
+            this.rtbComments.Size = new System.Drawing.Size(322, 168);
             this.rtbComments.TabIndex = 16;
             this.rtbComments.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 234);
+            this.label1.Location = new System.Drawing.Point(21, 296);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 17;
@@ -203,7 +207,7 @@ namespace StudentsDiary
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(140, 450);
+            this.btnSave.Location = new System.Drawing.Point(140, 470);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 18;
@@ -213,7 +217,7 @@ namespace StudentsDiary
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(387, 450);
+            this.btnCancel.Location = new System.Drawing.Point(387, 470);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 19;
@@ -221,11 +225,50 @@ namespace StudentsDiary
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // chbxAddLessons
+            // 
+            this.chbxAddLessons.AutoSize = true;
+            this.chbxAddLessons.Location = new System.Drawing.Point(140, 230);
+            this.chbxAddLessons.Name = "chbxAddLessons";
+            this.chbxAddLessons.Size = new System.Drawing.Size(15, 14);
+            this.chbxAddLessons.TabIndex = 20;
+            this.chbxAddLessons.UseVisualStyleBackColor = true;
+            // 
+            // lb_AddLessons
+            // 
+            this.lb_AddLessons.AutoSize = true;
+            this.lb_AddLessons.Location = new System.Drawing.Point(21, 230);
+            this.lb_AddLessons.Name = "lb_AddLessons";
+            this.lb_AddLessons.Size = new System.Drawing.Size(101, 13);
+            this.lb_AddLessons.TabIndex = 21;
+            this.lb_AddLessons.Text = "Zajęcia dodatkowe:";
+            // 
+            // cbxClass
+            // 
+            this.cbxClass.FormattingEnabled = true;
+            this.cbxClass.Location = new System.Drawing.Point(140, 259);
+            this.cbxClass.Name = "cbxClass";
+            this.cbxClass.Size = new System.Drawing.Size(322, 21);
+            this.cbxClass.TabIndex = 22;
+            // 
+            // lbClass
+            // 
+            this.lbClass.AutoSize = true;
+            this.lbClass.Location = new System.Drawing.Point(21, 259);
+            this.lbClass.Name = "lbClass";
+            this.lbClass.Size = new System.Drawing.Size(70, 13);
+            this.lbClass.TabIndex = 23;
+            this.lbClass.Text = "Klasa ucznia:";
+            // 
             // AddEditStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 505);
+            this.Controls.Add(this.lbClass);
+            this.Controls.Add(this.cbxClass);
+            this.Controls.Add(this.lb_AddLessons);
+            this.Controls.Add(this.chbxAddLessons);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
@@ -278,5 +321,9 @@ namespace StudentsDiary
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lb_AddLessons;
+        private System.Windows.Forms.CheckBox chbxAddLessons;
+        private System.Windows.Forms.ComboBox cbxClass;
+        private System.Windows.Forms.Label lbClass;
     }
 }
