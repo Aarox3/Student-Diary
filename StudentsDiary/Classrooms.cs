@@ -8,8 +8,8 @@ namespace StudentsDiary
 {
    public class Classrooms
     {
-        public int ClassId;
-        public string NameOfClass;
+        public int ClassId { get; set; }
+        public string NameOfClass { get; set; }
     }
     
 }

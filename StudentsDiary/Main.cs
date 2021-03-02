@@ -15,6 +15,8 @@ namespace StudentsDiary
         private FileHelper<List<Student>> _fileHelper =
             new FileHelper<List<Student>>(Program.FilePath);
 
+        public static List<Classrooms> Classrooms = new List<Classrooms>();
+
         public bool IsMaximize
         {
             get
@@ -37,6 +39,8 @@ namespace StudentsDiary
 
             SetColumnsHeader();
 
+            InitClassesCombobox();
+
             if (IsMaximize)
             {
                 WindowState = FormWindowState.Maximized;
@@ -57,6 +61,22 @@ namespace StudentsDiary
             {
                 MessageBox.Show(item.Name);
             }*/
+        }
+
+        public void InitClassesCombobox()
+        {
+            List<Classrooms> classrooms = new List<Classrooms>();
+            classrooms.Add(new Classrooms { ClassId = 1, NameOfClass = "1a" });
+            classrooms.Add(new Classrooms { ClassId = 2, NameOfClass = "1b" });
+            classrooms.Add(new Classrooms { ClassId = 3, NameOfClass = "2a" });
+            classrooms.Add(new Classrooms { ClassId = 4, NameOfClass = "2b" });
+
+            cbxSearchInClasses.DisplayMember = "NameOfClass";
+
+            foreach (var item in classrooms)
+            {
+                cbxSearchInClasses.Items.Add(item);
+            }
         }
 
         public void RefreshDiary()
@@ -161,18 +181,7 @@ namespace StudentsDiary
 
         private void cbxSearchInClasses_Click(object sender, EventArgs e)
         {
-            List<Classrooms> classrooms = new List<Classrooms>();
-            classrooms.Add(new Classrooms { ClassId = 1, NameOfClass = "1a" });
-            classrooms.Add(new Classrooms { ClassId = 2, NameOfClass = "1b" });
-            classrooms.Add(new Classrooms { ClassId = 3, NameOfClass = "2a" });
-            classrooms.Add(new Classrooms { ClassId = 4, NameOfClass = "2b" });
-
-
-            foreach (var item in classrooms)
-            {
-                cbxSearchInClasses.Items.Add(item);
-            }
-
+            
         }
     }
 }

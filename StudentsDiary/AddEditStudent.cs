@@ -24,17 +24,19 @@ namespace StudentsDiary
         private FileHelper<List<Student>> _fileHelper =
             new FileHelper<List<Student>>(Program.FilePath);
 
-
         public AddEditStudent(int id = 0)
         {
             InitializeComponent();
             _studentId = id;
             GetStudentData();
             tbName.Select();
+            var classes = new Main();
+            
         }
 
         private void GetStudentData()
         {
+            
             if (_studentId != 0)
             {
                 Text = "Edytowanie danych ucznia";
@@ -47,6 +49,7 @@ namespace StudentsDiary
                 {
                     throw new Exception("Brak użytkownika o podanym Id");
                 }
+                
                 FillTextBoxes();
 
             }
@@ -66,7 +69,7 @@ namespace StudentsDiary
             rtbComments.Text = _student.Comments;
             chbxAddLessons.Checked = _student.AddLessons;
             cbxClass.Text = _student.ClassOfStudent;
-
+            
 
             /*cbxClass.Items.Add("1a");
             cbxClass.Items.Add("1b");
@@ -132,7 +135,8 @@ namespace StudentsDiary
                 Technology = tbtech.Text,
                 AddLessons = chbxAddLessons.Checked,
                 ClassOfStudent = cbxClass.Text,
-
+                
+                
             };
             students.Add(student);
         }
