@@ -53,6 +53,7 @@
       <DependentUpon>AddEditStudent.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes.cs" />
+    <Compile Include="ClassHelper.cs" />
     <Compile Include="Classrooms.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="Main.cs">

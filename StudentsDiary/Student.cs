@@ -19,7 +19,7 @@ namespace StudentsDiary
         public string Foreign { get; set; }
         public bool AddLessons { get; set; }
         public string ClassOfStudent { get; set; }
-
+        public int ClassId { get; set; }
     }
 
   }

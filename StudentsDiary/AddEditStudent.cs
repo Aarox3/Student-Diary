@@ -21,17 +21,42 @@ namespace StudentsDiary
         private int _studentId;
         private Student _student;
 
+        public static List<Classrooms> Classrooms = new List<Classrooms>();
+
+
+        private List<Classrooms> _classrooms; 
+
         private FileHelper<List<Student>> _fileHelper =
             new FileHelper<List<Student>>(Program.FilePath);
 
         public AddEditStudent(int id = 0)
         {
             InitializeComponent();
+
             _studentId = id;
+
+            _classrooms = ClassHelper.GetClasrooms("Brak klasy");
+           
+            InitClassesCombobox();
+
             GetStudentData();
+
             tbName.Select();
-            var classes = new Main();
-            
+                   
+        }
+
+        private void InitClassesCombobox()
+        {
+            {
+                cbxClass.DataSource =_classrooms;
+                cbxClass.DisplayMember = "NameOfClass";
+                cbxClass.ValueMember = "ClassId";
+
+                foreach (var item in Classrooms)
+                {
+                    cbxClass.Items.Add(item);
+                }
+            }
         }
 
         private void GetStudentData()
@@ -68,8 +93,8 @@ namespace StudentsDiary
             tbtech.Text = _student.Technology;
             rtbComments.Text = _student.Comments;
             chbxAddLessons.Checked = _student.AddLessons;
-            cbxClass.Text = _student.ClassOfStudent;
-            
+            //cbxClass.Text = _student.ClassOfStudent;
+            cbxClass.SelectedItem = _classrooms.FirstOrDefault(x => x.ClassId == _student.ClassId);
 
             /*cbxClass.Items.Add("1a");
             cbxClass.Items.Add("1b");
@@ -121,7 +146,7 @@ namespace StudentsDiary
 
         private void AddNewUserToList(List<Student> students)
         {
-
+            
             var student = new Student
             {
                 Id = _studentId,
@@ -135,8 +160,8 @@ namespace StudentsDiary
                 Technology = tbtech.Text,
                 AddLessons = chbxAddLessons.Checked,
                 ClassOfStudent = cbxClass.Text,
-                
-                
+                // ClassId = cbxClass.Text,
+                ClassId = (cbxClass.SelectedItem as Classrooms).ClassId
             };
             students.Add(student);
         }

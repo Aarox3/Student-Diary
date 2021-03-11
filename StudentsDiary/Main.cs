@@ -1,6 +1,7 @@
 ﻿using StudentsDiary.Properties;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace StudentsDiary
@@ -11,12 +12,13 @@ namespace StudentsDiary
         // inny zapis, który może mięc problemy ze slashami -> 
         // -> private string _filePath = $@"{Environment.CurrentDirectory}\students.txt";
 
+        private List<Classrooms> _classrooms;
 
         private FileHelper<List<Student>> _fileHelper =
             new FileHelper<List<Student>>(Program.FilePath);
 
-        public static List<Classrooms> Classrooms = new List<Classrooms>();
-
+        
+        
         public bool IsMaximize
         {
             get
@@ -34,12 +36,18 @@ namespace StudentsDiary
         {
 
             InitializeComponent();
-
-            RefreshDiary();
-
-            SetColumnsHeader();
+                       
+            _classrooms = ClassHelper.GetClasrooms("Wszyscy uczniowie");
 
             InitClassesCombobox();
+
+            RefreshDiary();
+                      
+            SetColumnsHeader();
+
+            HideColumns();
+
+
 
             if (IsMaximize)
             {
@@ -63,40 +71,47 @@ namespace StudentsDiary
             }*/
         }
 
-        public void InitClassesCombobox()
+        private void HideColumns()
         {
-            List<Classrooms> classrooms = new List<Classrooms>();
-            classrooms.Add(new Classrooms { ClassId = 1, NameOfClass = "1a" });
-            classrooms.Add(new Classrooms { ClassId = 2, NameOfClass = "1b" });
-            classrooms.Add(new Classrooms { ClassId = 3, NameOfClass = "2a" });
-            classrooms.Add(new Classrooms { ClassId = 4, NameOfClass = "2b" });
+            dgvDiary.Columns[nameof(Student.ClassId)].Visible = false;
+        }
 
-            cbxSearchInClasses.DisplayMember = "NameOfClass";
+        private void InitClassesCombobox()
+        {
+            
+                cbxSearchInClasses.DataSource = _classrooms;
+                cbxSearchInClasses.DisplayMember = "NameOfClass";
+                cbxSearchInClasses.ValueMember = "ClassId";
 
-            foreach (var item in classrooms)
-            {
-                cbxSearchInClasses.Items.Add(item);
-            }
         }
 
         public void RefreshDiary()
         {
             var students = _fileHelper.DeserializeFromFile();
+
+            var selectedClass = (cbxSearchInClasses.SelectedItem as Classrooms).ClassId;
+
+            if (selectedClass != 0)
+            {
+
+                students = students.Where(x => x.ClassId== selectedClass).ToList();
+            }
+
             dgvDiary.DataSource = students;
         }
         private void SetColumnsHeader()
         {
-            dgvDiary.Columns[0].HeaderText = "Numer";
-            dgvDiary.Columns[1].HeaderText = "Imię";
-            dgvDiary.Columns[2].HeaderText = "Nazwisko";
-            dgvDiary.Columns[3].HeaderText = "Uwagi";
-            dgvDiary.Columns[4].HeaderText = "Matematyka";
-            dgvDiary.Columns[5].HeaderText = "Technologia";
-            dgvDiary.Columns[6].HeaderText = "Fizyka";
-            dgvDiary.Columns[7].HeaderText = "Język polski";
-            dgvDiary.Columns[8].HeaderText = "Język obcy";
-            dgvDiary.Columns[9].HeaderText = "Udział w dodatkowych zajęciach";
-            dgvDiary.Columns[10].HeaderText = "Klasa ucznia";
+            dgvDiary.Columns[nameof(Student.Id)].HeaderText = "Numer";
+            dgvDiary.Columns[nameof(Student.Name)].HeaderText = "Imię";
+            dgvDiary.Columns[nameof(Student.Surname)].HeaderText = "Nazwisko";
+            dgvDiary.Columns[nameof(Student.Comments)].HeaderText = "Uwagi";
+            dgvDiary.Columns[nameof(Student.Math)].HeaderText = "Matematyka";
+            dgvDiary.Columns[nameof(Student.Technology)].HeaderText = "Technologia";
+            dgvDiary.Columns[nameof(Student.Physics)].HeaderText = "Fizyka";
+            dgvDiary.Columns[nameof(Student.Polish)].HeaderText = "Język polski";
+            dgvDiary.Columns[nameof(Student.Foreign)].HeaderText = "Język obcy";
+            dgvDiary.Columns[nameof(Student.AddLessons)].HeaderText = "Udział w dodatkowych zajęciach";
+            dgvDiary.Columns[nameof(Student.ClassOfStudent)].HeaderText = "Klasa ucznia";
 
         }
 
@@ -181,7 +196,7 @@ namespace StudentsDiary
 
         private void cbxSearchInClasses_Click(object sender, EventArgs e)
         {
-            
+           
         }
     }
 }
